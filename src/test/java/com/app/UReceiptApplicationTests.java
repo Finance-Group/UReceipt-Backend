@@ -1,10 +1,10 @@
-package com.example.webfinanzas;
+package com.app;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class WebFinanzasApplicationTests {
+class UReceiptApplicationTests {
 
     @Test
     void contextLoads() {

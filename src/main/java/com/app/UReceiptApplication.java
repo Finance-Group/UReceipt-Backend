@@ -1,13 +1,13 @@
-package com.example.webfinanzas;
+package com.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WebFinanzasApplication {
+public class UReceiptApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WebFinanzasApplication.class, args);
+        SpringApplication.run(UReceiptApplication.class, args);
     }
 
 }
