@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(
@@ -28,4 +29,7 @@ public class Formato {
             columnDefinition = "varchar(100)"
     )
     private String nombre;
+
+    @OneToMany(mappedBy = "formato", cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.LAZY)
+    private List<Cartera> carteras;
 }

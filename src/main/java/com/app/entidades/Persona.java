@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.util.List;
 
 @Entity
 @Table(
@@ -16,13 +17,11 @@ import javax.validation.constraints.Email;
 @NoArgsConstructor
 public class Persona {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(
             name = "NumDocumento",
-            updatable = false,
-            columnDefinition = "varchar(15)"
+            updatable = false
     )
-    private String id;
+    private Long id;
 
     @Column(
             name = "NNombres",
@@ -60,4 +59,11 @@ public class Persona {
             columnDefinition = "varchar(30)"
     )
     private String password;
+
+    @ManyToOne
+    @JoinColumn(name = "documento_id", updatable = false, nullable = false, referencedColumnName = "CDocumento", foreignKey = @ForeignKey(name = "documentos_persona_fk"))
+    private Documento documento;
+
+    @OneToMany(mappedBy = "persona", cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.LAZY)
+    private List<Cartera> carteras;
 }

@@ -98,4 +98,8 @@ public class Recibo {
             columnDefinition = "float"
     )
     private Float tcea;
+
+    @ManyToOne
+    @JoinColumn(name = "cartera_id", updatable = false, nullable = false, referencedColumnName = "CCartera", foreignKey = @ForeignKey(name = "carteras_recibo_fk"))
+    private Cartera cartera;
 }

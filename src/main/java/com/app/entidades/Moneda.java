@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(
@@ -35,4 +36,7 @@ public class Moneda {
             columnDefinition = "varchar(3)"
     )
     private String simbolo;
+
+    @OneToMany(mappedBy = "moneda", cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.LAZY)
+    private List<Cartera> carteras;
 }

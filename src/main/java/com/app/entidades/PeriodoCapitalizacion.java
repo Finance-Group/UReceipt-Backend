@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(
@@ -28,4 +29,7 @@ public class PeriodoCapitalizacion {
             columnDefinition = "varchar(30)"
     )
     private String nombre;
+
+    @OneToMany(mappedBy = "periodocapitalizacion", cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.LAZY)
+    private List<Cartera> carteras;
 }

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(
@@ -34,4 +35,7 @@ public class Dia {
             nullable = false
     )
     private Long numero;
+
+    @OneToMany(mappedBy = "dia", cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.LAZY)
+    private List<Cartera> carteras;
 }
