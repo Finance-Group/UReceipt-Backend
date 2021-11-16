@@ -2,10 +2,12 @@ package com.app.dto;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class CarteraDto {
     private Long id;
-    private Double descuento;
+    private Date descuento;
     private Double plazo;
     private Integer taza;
     private Integer peridoCapitalizacion;
