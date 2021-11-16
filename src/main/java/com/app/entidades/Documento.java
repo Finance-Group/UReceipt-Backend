@@ -27,5 +27,5 @@ public class Documento {
             nullable = false,
             columnDefinition = "varchar(30)"
     )
-    private Integer numero;
+    private String numero;
 }
