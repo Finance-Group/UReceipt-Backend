@@ -27,9 +27,9 @@ public class GastoInicial {
     @Column(
             name = "NGastoInicial",
             nullable = false,
-            columnDefinition = "varchar(30)"
+            columnDefinition = "varchar(200)"
     )
-    private String nombre;
+    private String NombreGasto;
 
     @OneToMany(mappedBy = "gastoinicial", cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.LAZY)
     private List<CarteraGastoInicial> carteraGastoInicial = new ArrayList<>();

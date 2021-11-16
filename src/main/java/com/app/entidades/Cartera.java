@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -26,63 +27,55 @@ public class Cartera {
     @Column(
             name = "DDescuento",
             nullable = false,
-            columnDefinition = "varchar(30)"
+            columnDefinition = "TIMESTAMP WITHOUT TIME ZONE"
     )
-    private Double descuento;
+    private Date descuento;
 
     @Column(
             name = "NumPlazo",
-            nullable = false,
-            columnDefinition = "varchar(30)"
+            nullable = false
     )
     private Double nPlazo;
 
     @Column(
             name = "NumTaza",
-            nullable = false,
-            columnDefinition = "varchar(30)"
+            nullable = false
     )
     private Integer nTaza;
 
     @Column(
             name = "NumPeriodoCapitalizacion",
-            nullable = false,
-            columnDefinition = "varchar(30)"
+            nullable = false
     )
     private Integer peridoCapitalizacion;
 
     @Column(
             name = "MGastoITotal",
-            nullable = false,
-            columnDefinition = "varchar(30)"
+            nullable = true
     )
     private Double gastoITotal;
 
     @Column(
             name = "MGastoFTotal",
-            nullable = false,
-            columnDefinition = "varchar(30)"
+            nullable = true
     )
     private Double GastoFTotal;
 
     @Column(
             name = "NumRecibos",
-            nullable = false,
-            columnDefinition = "varchar(30)"
+            nullable = true
     )
     private Integer numRecibos;
 
     @Column(
             name = "MRecibidoTotal",
-            nullable = false,
-            columnDefinition = "varchar(30)"
+            nullable = true
     )
     private Double recibidoTotal;
 
     @Column(
             name = "PerTCEATotal",
-            nullable = false,
-            columnDefinition = "varchar(30)"
+            nullable = true
     )
     private Double tceaTotal;
 

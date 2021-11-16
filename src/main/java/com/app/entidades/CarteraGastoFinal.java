@@ -29,4 +29,10 @@ public class CarteraGastoFinal {
     @ManyToOne
     @JoinColumn(name = "gastoFinal_id", updatable = false, nullable = false, referencedColumnName = "CGastoFinal", foreignKey = @ForeignKey(name = "carteras_gastoFinal_fk"))
     private GastoFinal gastofinal;
+
+    @Column(
+            name = "MGastoInicial",
+            nullable = false
+    )
+    private Double MGastoInicial;
 }

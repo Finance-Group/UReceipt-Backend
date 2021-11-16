@@ -30,4 +30,10 @@ public class CarteraGastoInicial {
     @JoinColumn(name = "gastoInicial_id", updatable = false, nullable = false, referencedColumnName = "CGastoInicial", foreignKey = @ForeignKey(name = "carteras_gastoInicial_fk"))
     private GastoInicial gastoinicial;
 
+    @Column(
+            name = "MGastoFinal",
+            nullable = false
+    )
+    private Double MGastoFinal;
+
 }
