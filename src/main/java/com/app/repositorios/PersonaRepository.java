@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface PersonaRepository extends JpaRepository<Persona,String> {
+public interface PersonaRepository extends JpaRepository<Persona,Long> {
     Optional<Persona> findByRuc (Long ruc);
     Optional<Persona> findByCorreo (String correo);
 }
