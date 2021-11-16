@@ -27,7 +27,7 @@ public class Moneda {
             nullable = false,
             columnDefinition = "varchar(30)"
     )
-    private String numero;
+    private String nombre;
 
     @Column(
             name = "SMoneda",

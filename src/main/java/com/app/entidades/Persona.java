@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 @Entity
 @Table(
@@ -39,15 +40,18 @@ public class Persona {
 
     @Column(
             name = "NumRuc",
-            nullable = false
+            nullable = false,
+            unique = true
     )
     private Long ruc;
 
     @Column(
             name = "NEmail",
             nullable = false,
-            columnDefinition = "varchar(60)"
+            columnDefinition = "varchar(60)",
+            unique = true
     )
+    @Email
     private String correo;
 
     @Column(
