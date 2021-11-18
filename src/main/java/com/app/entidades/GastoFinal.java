@@ -29,7 +29,7 @@ public class GastoFinal {
             nullable = false,
             columnDefinition = "varchar(200)"
     )
-    private String NpmbreGasto;
+    private String nombre;
 
     @OneToMany(mappedBy = "gastofinal", cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.LAZY)
     private List<CarteraGastoFinal> carteraGastoFinal = new ArrayList<>();
