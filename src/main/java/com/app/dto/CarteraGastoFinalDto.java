@@ -9,5 +9,5 @@ public class CarteraGastoFinalDto {
     private Long id;
     private Cartera cartera;
     private GastoFinal gastofinal;
-
+    private Double MGastoFinal;
 }

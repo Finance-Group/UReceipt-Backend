@@ -31,9 +31,9 @@ public class CarteraGastoInicial {
     private GastoInicial gastoinicial;
 
     @Column(
-            name = "MGastoFinal",
+            name = "MGastoInicial",
             nullable = false
     )
-    private Double MGastoFinal;
+    private Double MGastoInicial;
 
 }
