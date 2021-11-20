@@ -5,6 +5,6 @@ import com.app.excepciones.AppException;
 
 public interface PersonaServicio {
     PersonaDto crearUsuario(PersonaDto personaDto) throws AppException;
-    PersonaDto validarUsuario(Long nDocumento, String contraseña) throws AppException;
-    void cambiarContraseña(Long nDocumento, String contraseña) throws AppException;
+    boolean validarUsuario(PersonaDto personaDto) throws AppException;
+    void cambiarContraseña(String correo, String contraseña) throws AppException;
 }

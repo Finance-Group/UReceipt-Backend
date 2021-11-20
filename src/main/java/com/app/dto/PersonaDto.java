@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class PersonaDto {
-    private String id;
+    private Long id;
     private String nombres;
     private String apellidos;
     private Long ruc;
