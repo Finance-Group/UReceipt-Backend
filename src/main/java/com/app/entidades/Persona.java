@@ -16,26 +16,20 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Persona {
+
     @Id
     @Column(
             name = "NumDocumento",
-            updatable = false
+            nullable = false
     )
     private Long id;
 
     @Column(
-            name = "NNombres",
+            name = "NNombre",
             nullable = false,
             columnDefinition = "varchar(30)"
     )
-    private String nombres;
-
-    @Column(
-            name = "NApellidos",
-            nullable = false,
-            columnDefinition = "varchar(30)"
-    )
-    private String apellidos;
+    private String nombre;
 
     @Column(
             name = "NumRuc",

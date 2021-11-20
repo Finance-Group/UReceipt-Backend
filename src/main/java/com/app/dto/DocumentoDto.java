@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class DocumentoDto {
     private Long id;
-    private String numero;
+    private String nombre;
 
 }

@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Documento {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(
             name = "CDocumento",
             updatable = false
@@ -28,7 +28,7 @@ public class Documento {
             nullable = false,
             columnDefinition = "varchar(30)"
     )
-    private String numero;
+    private String nombre;
 
     @OneToMany(mappedBy = "documento", cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.LAZY)
     private List<Persona> personas;
