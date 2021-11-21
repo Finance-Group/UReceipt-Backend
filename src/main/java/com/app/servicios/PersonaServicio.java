@@ -1,5 +1,6 @@
 package com.app.servicios;
 
+import com.app.dto.CambiarContraseniaDto;
 import com.app.dto.PersonaDto;
 import com.app.entidades.Documento;
 import com.app.entidades.Persona;
@@ -36,6 +37,17 @@ public class PersonaServicio {
         persona.setCorreo(personaDto.getCorreo());
         persona.setPassword(personaDto.getPassword());
         persona.setDocumento(documento);
+
+        return personaRepository.save(persona);
+    }
+
+    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
+    public Persona cambiarContrasenia(CambiarContraseniaDto cambiarContraseniaDto) throws AppException{
+
+        Persona persona = personaRepository.findByCorreo(cambiarContraseniaDto.getCorreo())
+                .orElseThrow(() -> new NoEncontradoError("NO ENCONTRADO-404","PERSONA-NOENCONTRADO-404"));
+
+        persona.setPassword(cambiarContraseniaDto.getPassword());
 
         return personaRepository.save(persona);
     }

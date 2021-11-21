@@ -2,13 +2,10 @@ package com.app.controladores;
 
 import com.app.common.EntityDtoConverter;
 import com.app.dto.DocumentoDto;
-import com.app.dto.PersonaDto;
 import com.app.entidades.Documento;
-import com.app.entidades.Persona;
 import com.app.excepciones.AppException;
 import com.app.repositorios.DocumentoRepository;
 import com.app.servicios.DocumentoServicio;
-import com.app.servicios.PersonaServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
