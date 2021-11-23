@@ -31,5 +31,8 @@ public class Formato {
     private String nombre;
 
     @OneToMany(mappedBy = "formato", cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.LAZY)
-    private List<Cartera> carteras;
+    private List<CarteraGastoInicial> carteraGastoInicialList;
+
+    @OneToMany(mappedBy = "formato", cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.LAZY)
+    private List<CarteraGastoFinal> carteraGastoFinalList;
 }

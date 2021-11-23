@@ -111,8 +111,4 @@ public class Cartera {
     @ManyToOne
     @JoinColumn(name = "dia_id", updatable = false, nullable = false, referencedColumnName = "CDia", foreignKey = @ForeignKey(name = "dia_cartera_fk"))
     private Dia dia;
-
-    @ManyToOne
-    @JoinColumn(name = "formato_id", updatable = false, nullable = false, referencedColumnName = "CFormato", foreignKey = @ForeignKey(name = "formato_cartera_fk"))
-    private Formato formato;
 }

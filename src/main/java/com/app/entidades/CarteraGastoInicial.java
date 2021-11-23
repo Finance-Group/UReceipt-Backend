@@ -30,6 +30,11 @@ public class CarteraGastoInicial {
     @JoinColumn(name = "gastoInicial_id", updatable = false, nullable = false, referencedColumnName = "CGastoInicial", foreignKey = @ForeignKey(name = "carteras_gastoInicial_fk"))
     private GastoInicial gastoinicial;
 
+
+    @ManyToOne
+    @JoinColumn(name = "formato_id", updatable = false, nullable = false, referencedColumnName = "CFormato", foreignKey = @ForeignKey(name = "formato_cartera_gasto_inicial_fk"))
+    private Formato formato;
+
     @Column(
             name = "MGastoInicial",
             nullable = false
