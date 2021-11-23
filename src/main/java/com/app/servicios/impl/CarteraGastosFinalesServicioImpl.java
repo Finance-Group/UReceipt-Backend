@@ -4,12 +4,14 @@ import com.app.dto.CarteraGastoFinalDto;
 import com.app.dto.CrearCarteraGastoFinalDto;
 import com.app.entidades.Cartera;
 import com.app.entidades.CarteraGastoFinal;
+import com.app.entidades.Formato;
 import com.app.entidades.GastoFinal;
 import com.app.excepciones.AppException;
 import com.app.excepciones.NoEncontradoError;
 import com.app.excepciones.ServidorInternoError;
 import com.app.repositorios.CarteraGastosFinalesRepository;
 import com.app.repositorios.CarteraRepository;
+import com.app.repositorios.FormatoRepository;
 import com.app.repositorios.GastoFinalRepository;
 import com.app.servicios.CarteraGastosFinalesServicio;
 import org.modelmapper.ModelMapper;
@@ -30,6 +32,8 @@ public class CarteraGastosFinalesServicioImpl implements CarteraGastosFinalesSer
     private CarteraRepository carteraRepository;
     @Autowired
     private GastoFinalRepository gastoFinalRepository;
+    @Autowired
+    private FormatoRepository formatoRepository;
 
     @Transactional
     @Override
@@ -84,7 +88,9 @@ public class CarteraGastosFinalesServicioImpl implements CarteraGastosFinalesSer
         CarteraGastoFinal carteraGastoFinal = carteraGastosFinalesRepository.findByCarteraIdAndGastofinalId(carteraId, gastoFinalId)
                 .orElseThrow(() -> new NoEncontradoError("NO ENCONTRADO-404","CARTERA-GASTOFINAL-NOENCONTRADO-404"));
 
-        //carteraGastoFinal.setFormato(formatoId);
+        Formato formato = formatoRepository.findById(formatoId)
+                .orElseThrow(() -> new NoEncontradoError("NO ENCONTRADO-404","FORMATO-NOENCONTRADO-404"));
+        carteraGastoFinal.setFormato(formato);
 
         try {
             carteraGastosFinalesRepository.save(carteraGastoFinal);

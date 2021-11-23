@@ -6,5 +6,6 @@ import lombok.Data;
 public class CrearCarteraGastoFinalDto {
     private Long carteraId;
     private Long gastoFinalId;
+    private Long formatoId;
     private Double MGastoFinal;
 }
