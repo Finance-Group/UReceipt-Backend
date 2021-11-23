@@ -16,5 +16,10 @@ public class CarteraDto {
     private Integer numRecibos;
     private Double recibidoTotal;
     private Double tceaTotal;
-
+    private Long personaId;
+    private Long monedaId;
+    private Long pcId;
+    private Long plazoId;
+    private Long tasaId;
+    private Long diaId;
 }
