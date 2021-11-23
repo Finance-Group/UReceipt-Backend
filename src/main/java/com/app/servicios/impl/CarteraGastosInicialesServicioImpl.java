@@ -49,6 +49,12 @@ public class CarteraGastosInicialesServicioImpl implements CarteraGastosIniciale
         carteraGastoInicial.setCartera(cartera);
         carteraGastoInicial.setGastoinicial(gastoInicial);
 
+        if (cartera.getGastoITotal() > 0) {
+            cartera.setGastoITotal(cartera.getGastoITotal() + crearCarteraGastoInicialDto.getMGastoInicial());
+        } else {
+            cartera.setGastoITotal(crearCarteraGastoInicialDto.getMGastoInicial());
+        }
+
         try {
             carteraGastoInicial = carteraGastosInicialesRepository.save(carteraGastoInicial);
         } catch (Exception e) {

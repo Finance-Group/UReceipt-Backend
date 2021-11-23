@@ -7,11 +7,14 @@ import com.app.excepciones.NoEncontradoError;
 import com.app.excepciones.ServidorInternoError;
 import com.app.repositorios.*;
 import com.app.servicios.CarteraServicio;
+import org.decampo.xirr.Transaction;
+import org.decampo.xirr.Xirr;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,6 +42,9 @@ public class CarteraServicioImpl implements CarteraServicio {
 
     @Autowired
     private DiaRepository diaRepository;
+
+    @Autowired
+    ReciboRepository reciboRepository;
 
     @Transactional
     @Override
@@ -92,7 +98,19 @@ public class CarteraServicioImpl implements CarteraServicio {
     public CarteraDto detallesCartera(Long id) throws AppException {
         Cartera cartera = carteraRepository.findById(id)
                 .orElseThrow(() -> new NoEncontradoError("NO ENCONTRADO-404","CARTERA-NOENCONTRADA-404"));
-        // FALTA LOS NULLABLES Y POR ENDE LA TCEA DE LA CARTERA
+        List<Recibo> recibos = reciboRepository.getAllByCarteraId(id);
+        cartera.setNumRecibos(recibos.size());
+        // Cálculo TCEA
+        List<Transaction> transactions = new ArrayList<>();
+        transactions.add(new Transaction(1, cartera.getDescuento()));
+        Float sumaFlujo = 0.0F;
+        for (Recibo recibo: recibos){
+            transactions.add(new Transaction(cartera.getGastoFTotal() - recibo.getMonto(), recibo.getFecha_pago()));
+            sumaFlujo += recibo.getRecibido();
+        }
+        transactions.set(0, new Transaction(cartera.getRecibidoTotal(), cartera.getDescuento()));
+        cartera.setTceaTotal(new Xirr(transactions).xirr());
+
         return modelMapper.map(obtenerCarteraEntity(cartera.getId()), CarteraDto.class);
     }
 

@@ -48,6 +48,12 @@ public class CarteraGastosFinalesServicioImpl implements CarteraGastosFinalesSer
         carteraGastoFinal.setCartera(cartera);
         carteraGastoFinal.setGastofinal(gastoFinal);
 
+        if (cartera.getGastoFTotal() > 0) {
+            cartera.setGastoFTotal(cartera.getGastoFTotal() + crearCarteraGastoFinalDto.getMGastoFinal());
+        } else {
+            cartera.setGastoFTotal(crearCarteraGastoFinalDto.getMGastoFinal());
+        }
+
         try {
             carteraGastoFinal = carteraGastosFinalesRepository.save(carteraGastoFinal);
         } catch (Exception e) {
