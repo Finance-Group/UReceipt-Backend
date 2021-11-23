@@ -58,8 +58,8 @@ public class CarteraServicioImpl implements CarteraServicio {
 
         Cartera cartera = new Cartera();
         cartera.setDescuento(carteraDto.getDescuento());
-        cartera.setNPlazo(carteraDto.getPlazo());
-        cartera.setNTaza(carteraDto.getTaza());
+        cartera.setNumPlazo(carteraDto.getPlazo());
+        cartera.setNumTaza(carteraDto.getTaza());
         cartera.setPeridoCapitalizacion(carteraDto.getPeridoCapitalizacion());
         cartera.setPersona(persona);
         cartera.setMoneda(moneda);

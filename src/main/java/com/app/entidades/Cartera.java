@@ -35,13 +35,13 @@ public class Cartera {
             name = "NumPlazo",
             nullable = false
     )
-    private Double nPlazo;
+    private Float numPlazo;
 
     @Column(
             name = "NumTaza",
             nullable = false
     )
-    private Double nTaza;
+    private Float numTaza;
 
     @Column(
             name = "NumPeriodoCapitalizacion",
