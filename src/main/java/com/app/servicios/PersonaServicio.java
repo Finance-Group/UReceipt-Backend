@@ -15,6 +15,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class PersonaServicio {
 
@@ -25,7 +27,7 @@ public class PersonaServicio {
     private DocumentoRepository documentoRepository;
 
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
-    public Persona crearPersona(PersonaDto personaDto) throws AppException{
+    public Persona Register(PersonaDto personaDto) throws AppException{
 
         Documento documento = documentoRepository.findById(personaDto.getDocumentoId())
                 .orElseThrow(() -> new NoEncontradoError("NO ENCONTRADO-404","DOCUMENTO-NOENCONTRADO-404"));
@@ -50,6 +52,24 @@ public class PersonaServicio {
         persona.setPassword(cambiarContraseniaDto.getPassword());
 
         return personaRepository.save(persona);
+    }
+
+    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
+    public Boolean loginUser(Long username, String token) throws Exception {
+        Persona persona = personaRepository.findById(username)
+                .orElseThrow(() -> new NoEncontradoError("NO ENCONTRADO-404","PERSONA-NOENCONTRADO-404"));
+        String realToken = persona.getPassword();
+
+        if (realToken.equals(token)) {
+            return true;
+        } else {
+            throw new NoEncontradoError("NO ENCONTRADO-404","PERSONA-NOENCONTRADO-404");
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public List<Persona> EncontrarUsuarios() {
+        return personaRepository.usuarios();
     }
 
 }
