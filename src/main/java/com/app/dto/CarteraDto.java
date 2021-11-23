@@ -9,7 +9,7 @@ public class CarteraDto {
     private Long id;
     private Date descuento;
     private Double plazo;
-    private Integer taza;
+    private Double taza;
     private Integer peridoCapitalizacion;
     private Double gastoITotal;
     private Double GastoFTotal;

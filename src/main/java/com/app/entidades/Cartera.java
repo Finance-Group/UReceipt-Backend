@@ -41,7 +41,7 @@ public class Cartera {
             name = "NumTaza",
             nullable = false
     )
-    private Integer nTaza;
+    private Double nTaza;
 
     @Column(
             name = "NumPeriodoCapitalizacion",
