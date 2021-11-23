@@ -19,5 +19,5 @@ public class ReciboDto {
     private Float recibido;
     private Float entregado;
     private Float tcea;
-
+    private Long carteraId;
 }
