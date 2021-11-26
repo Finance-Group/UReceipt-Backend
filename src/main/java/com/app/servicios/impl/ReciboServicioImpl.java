@@ -47,10 +47,10 @@ public class ReciboServicioImpl implements ReciboServicio {
         recibo.setDias(dias);
         // Calcular TE %
         Long m = cartera.getDia().getNumero() / cartera.getPeridoCapitalizacion();
-        if (cartera.getTasa().getNombre() == "NOMINAL") {
+        if (cartera.getTasa().getNombre() == "Tasa nominal") {
             Float base = 1 + (cartera.getNumTaza() / m);
             recibo.setTasa_e((float) Math.pow(base, recibo.getDias()) - 1);
-        } else if (cartera.getTasa().getNombre() == "EFECTIVA"){
+        } else if (cartera.getTasa().getNombre() == "Tasa efectiva"){
             Long exponente = recibo.getDias() / m;
             recibo.setTasa_e((float) (Math.pow(1 + cartera.getNumTaza(), exponente) - 1));
         } else throw new ServidorInternoError("SERVIDOR_INTERNO_ERROR","SERVIDOR_INTERNO_ERROR");
