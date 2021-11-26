@@ -39,19 +39,21 @@ public class ReciboServicioImpl implements ReciboServicio {
         recibo.setFecha_pago(reciboDto.getFecha_pago());
         recibo.setMonto(reciboDto.getMonto());
         recibo.setRetencion(reciboDto.getRetencion());
-
+        recibo.setCartera(cartera);
         // RESTA DÍAS
-        long tempDias = reciboDto.getFecha_pago().getTime() - reciboDto.getFecha_emision().getTime();
+        long tempDias = reciboDto.getFecha_pago().getTime() - cartera.getDescuento().getTime();
         TimeUnit timeUnit = TimeUnit.DAYS;
         Integer dias = Math.toIntExact(timeUnit.convert(tempDias, TimeUnit.MILLISECONDS));
         recibo.setDias(dias);
+
         // Calcular TE %
         Long m = cartera.getDia().getNumero() / cartera.getPeridoCapitalizacion();
-        if (cartera.getTasa().getNombre() == "Tasa nominal") {
+
+        if (cartera.getTasa().getId() == 1) {
             Float base = 1 + (cartera.getNumTaza() / m);
             recibo.setTasa_e((float) Math.pow(base, recibo.getDias()) - 1);
-        } else if (cartera.getTasa().getNombre() == "Tasa efectiva"){
-            Long exponente = recibo.getDias() / m;
+        } else if (cartera.getTasa().getId() == 2){
+            Float exponente = (float) recibo.getDias() / m;
             recibo.setTasa_e((float) (Math.pow(1 + cartera.getNumTaza(), exponente) - 1));
         } else throw new ServidorInternoError("SERVIDOR_INTERNO_ERROR","SERVIDOR_INTERNO_ERROR");
         // Calcular D %
@@ -61,9 +63,11 @@ public class ReciboServicioImpl implements ReciboServicio {
         // Calcular Monto neto
         recibo.setNeto(recibo.getMonto() - recibo.getMonto_descuento());
         // Calcular Monto recibido
-        recibo.setRecibido((float) (recibo.getNeto() + cartera.getGastoITotal()));
+        if (cartera.getGastoITotal() == null) recibo.setRecibido((float) (recibo.getNeto()));
+        else recibo.setRecibido((float) (recibo.getNeto() + cartera.getGastoITotal()));
         // Calcular Monto entregado
-        recibo.setEntregado((float) (recibo.getNeto() - cartera.getGastoFTotal()));
+        if (cartera.getGastoFTotal() == null) recibo.setEntregado((float) (recibo.getNeto()));
+        else recibo.setEntregado((float) (recibo.getNeto() - cartera.getGastoFTotal()));
         // Calcular TCEA
         Float baseTCEA = recibo.getEntregado() / recibo.getRecibido();
         Long exponenteTCEA = m / recibo.getDias();
