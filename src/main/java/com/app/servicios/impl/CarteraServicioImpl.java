@@ -103,11 +103,13 @@ public class CarteraServicioImpl implements CarteraServicio {
         // Cálculo TCEA
         List<Transaction> transactions = new ArrayList<>();
         transactions.add(new Transaction(1, cartera.getDescuento()));
-        Float sumaFlujo = 0.0F;
+        Double sumaFlujo = 0.0;
+        if (cartera.getGastoFTotal() == null) cartera.setGastoFTotal(0.0);
         for (Recibo recibo: recibos){
             transactions.add(new Transaction(cartera.getGastoFTotal() - recibo.getMonto(), recibo.getFecha_pago()));
             sumaFlujo += recibo.getRecibido();
         }
+        cartera.setRecibidoTotal(sumaFlujo);
         transactions.set(0, new Transaction(cartera.getRecibidoTotal(), cartera.getDescuento()));
         cartera.setTceaTotal(new Xirr(transactions).xirr());
 
