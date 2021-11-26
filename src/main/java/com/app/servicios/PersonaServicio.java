@@ -1,6 +1,7 @@
 package com.app.servicios;
 
 import com.app.dto.CambiarContraseniaDto;
+import com.app.dto.LoginDto;
 import com.app.dto.PersonaDto;
 import com.app.entidades.Documento;
 import com.app.entidades.Persona;
@@ -54,17 +55,12 @@ public class PersonaServicio {
         return personaRepository.save(persona);
     }
 
-    @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
-    public Boolean loginUser(Long username, String token) throws Exception {
-        Persona persona = personaRepository.findById(username)
+    @Transactional(readOnly = true)
+    public Persona loginUser(LoginDto loginDto) throws Exception {
+        Persona persona = personaRepository.iniciar(loginDto.getUsername(), loginDto.getPassword())
                 .orElseThrow(() -> new NoEncontradoError("NO ENCONTRADO-404","PERSONA-NOENCONTRADO-404"));
-        String realToken = persona.getPassword();
 
-        if (realToken.equals(token)) {
-            return true;
-        } else {
-            throw new NoEncontradoError("NO ENCONTRADO-404","PERSONA-NOENCONTRADO-404");
-        }
+        return persona;
     }
 
     @Transactional(readOnly = true)

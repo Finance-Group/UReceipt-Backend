@@ -15,4 +15,7 @@ public interface PersonaRepository extends JpaRepository<Persona,Long> {
 
       @Query(value = "SELECT * FROM persona p", nativeQuery = true)
       List<Persona> usuarios();
+
+      @Query(value = "SELECT * FROM persona p WHERE p.num_documento =:username AND p.NPassword =:contra", nativeQuery = true)
+      Optional<Persona> iniciar(Long username, String contra);
 }

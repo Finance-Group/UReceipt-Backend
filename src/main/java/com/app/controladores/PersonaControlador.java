@@ -40,15 +40,12 @@ public class PersonaControlador {
         return new ResponseEntity<>(entityDtoConverter.convertPersonaToDto(persona), HttpStatus.OK);
     }
 
-    @GetMapping("/login")
-    public ResponseEntity<String> loginUsuario(@RequestBody LoginDto loginDto)
-            throws Exception {
-        Boolean estado = personaServicio.loginUser(loginDto.getUsername(), loginDto.getPassword());
-        if (estado == true) {
-            return new ResponseEntity<>(" login correcto ", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(" login incorrecto ", HttpStatus.OK);
-        }
+    @PostMapping("/login")
+    public ResponseEntity<PersonaDto> loginUsuario(@RequestBody LoginDto loginDto) throws Exception {
+        Persona persona = personaServicio.loginUser(loginDto);
+
+        return new ResponseEntity<>(entityDtoConverter.convertPersonaToDto(persona), HttpStatus.OK);
+
     }
 
     @GetMapping
